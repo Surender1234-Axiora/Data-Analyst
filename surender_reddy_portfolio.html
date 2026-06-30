@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Surender Reddy — Data Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink: #0f0f0f;
+      --paper: #f8f6f1;
+      --mid: #6b6b6b;
+      --accent: #2a5cff;
+      --accent-soft: #e8eeff;
+      --rule: #e0ddd6;
+      --white: #ffffff;
+      --hero-dark: #0b0f1a;
+      --hero-mid: #161c2e;
+      --neon: #4f8cff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 500;
+      color: var(--accent); letter-spacing: .02em;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; color: var(--mid); text-decoration: none;
+      font-weight: 500; letter-spacing: .02em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-resume-link {
+      color: var(--accent) !important;
+      font-weight: 600 !important;
+    }
+
+    /* ── HERO ── */
+    .hero-wrapper {
+      background: var(--hero-dark);
+      position: relative; overflow: hidden;
+    }
+    .hero-wrapper::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 80% 50%, #1a2a5e 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(79,140,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,140,255,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    header {
+      position: relative; z-index: 2;
+      max-width: 1100px; margin: 0 auto;
+      padding: 80px 5vw 0;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 48px; align-items: center;
+    }
+    .hero-left { padding-bottom: 80px; }
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500;
+      color: var(--neon); letter-spacing: .18em; text-transform: uppercase;
+      margin-bottom: 22px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block; width: 28px; height: 1px;
+      background: var(--neon);
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(38px, 6vw, 64px);
+      line-height: 1.08; font-weight: 400;
+      color: #ffffff; margin-bottom: 24px;
+    }
+    h1 em { font-style: italic; color: var(--neon); }
+    .hero-summary {
+      font-size: 15px; color: #8a9bbf; line-height: 1.8;
+      margin-bottom: 36px; max-width: 520px;
+    }
+    .hero-cta-row { margin-bottom: 18px; }
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 12px 22px; border-radius: 100px;
+      background: var(--neon); color: #061021;
+      font-size: 13px; font-weight: 600; text-decoration: none;
+      letter-spacing: .01em;
+      box-shadow: 0 0 0 0 rgba(79,140,255,.4);
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .btn-download:hover {
+      background: #6ba1ff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(79,140,255,.35);
+    }
+    .contact-row {
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    }
+    .contact-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 16px; border-radius: 100px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      font-size: 12px; color: #c8d4f0; text-decoration: none;
+      font-weight: 500; transition: border-color .2s, background .2s;
+    }
+    .contact-chip:hover {
+      background: rgba(79,140,255,.15);
+      border-color: rgba(79,140,255,.5);
+    }
+    .contact-chip svg { flex-shrink: 0; }
+
+    /* Hero right — stats panel */
+    .hero-right {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 0;
+      margin-bottom: 80px;
+      backdrop-filter: blur(8px);
+    }
+    .stat-item {
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat-item:first-child { padding-top: 0; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px; color: #fff; line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-num span { font-size: 22px; color: var(--neon); margin-left: 2px; }
+    .stat-label {
+      font-size: 12px; color: #5a6a8a;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+
+    /* Hero bottom bar */
+    .hero-bar {
+      position: relative; z-index: 2;
+      background: rgba(255,255,255,.04);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .hero-bar-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 16px 5vw;
+      display: flex; flex-wrap: wrap; gap: 24px; align-items: center;
+    }
+    .domain-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; color: #5a6a8a;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .domain-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--neon); }
+
+    /* ── SECTIONS ── */
+    section { max-width: 1100px; margin: 0 auto; padding: 72px 5vw; border-bottom: 1px solid var(--rule); }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 40px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 400; margin-bottom: 40px; line-height: 1.15;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .skill-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 28px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .skill-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,.07);
+    }
+    .skill-card-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--accent-soft); margin-bottom: 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .skill-card h3 {
+      font-size: 14px; font-weight: 600; margin-bottom: 10px;
+      color: var(--ink);
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag {
+      font-size: 11px; font-weight: 500;
+      background: var(--paper); border: 1px solid var(--rule);
+      border-radius: 100px; padding: 4px 11px; color: var(--mid);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 1px; background: var(--rule);
+    }
+    .tl-item {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 48px;
+    }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -5px; top: 8px;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--paper);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .tl-meta {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      align-items: baseline; margin-bottom: 6px;
+    }
+    .tl-role {
+      font-weight: 600; font-size: 16px; color: var(--ink);
+    }
+    .tl-company {
+      font-size: 14px; color: var(--accent); font-weight: 500;
+    }
+    .tl-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--mid); margin-left: auto;
+    }
+    .tl-bullets { list-style: none; margin-top: 12px; }
+    .tl-bullets li {
+      font-size: 14px; color: var(--mid); line-height: 1.65;
+      padding-left: 18px; position: relative; margin-bottom: 7px;
+    }
+    .tl-bullets li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--accent); font-size: 12px; top: 2px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px; padding: 32px;
+      transition: box-shadow .2s, transform .2s;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,.07);
+    }
+    .project-thumb {
+      width: 100%; aspect-ratio: 4/3;
+      border-radius: 8px; overflow: hidden;
+      margin-bottom: 18px; border: 1px solid var(--rule);
+      background: #f3f2f1;
+    }
+    .project-thumb svg { width: 100%; height: 100%; display: block; }
+    .project-zoom-hint {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--accent); margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .lightbox-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(10,12,18,.86);
+      align-items: center; justify-content: center;
+      padding: 4vw;
+    }
+    .lightbox-overlay.open { display: flex; }
+    .lightbox-box {
+      background: #11161f; border-radius: 14px;
+      max-width: 980px; width: 100%;
+      overflow: hidden; border: 1px solid rgba(255,255,255,.1);
+    }
+    .lightbox-box svg { width: 100%; height: auto; display: block; }
+    .lightbox-caption {
+      padding: 16px 22px; background: #0b0f1a;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .lightbox-caption h4 {
+      font-family: 'DM Serif Display', serif; font-weight: 400;
+      font-size: 16px; color: #fff;
+    }
+    .lightbox-close {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      color: #fff; width: 32px; height: 32px; border-radius: 50%;
+      font-size: 16px; cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,.16); }
+    .lightbox-tabs {
+      display: flex; gap: 8px; padding: 14px 22px 0; background: #0b0f1a;
+      flex-wrap: wrap;
+    }
+    .page-tab {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: #8a9bbf; background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1); border-bottom: none;
+      border-radius: 6px 6px 0 0;
+      padding: 8px 16px; cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .page-tab:hover { background: rgba(255,255,255,.09); color: #c8d4f0; }
+    .page-tab.active {
+      background: #11161f; color: var(--neon);
+      border-color: rgba(255,255,255,.1);
+    }
+    .project-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--accent); letter-spacing: .1em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px; font-weight: 400; margin-bottom: 12px;
+    }
+    .project-card p { font-size: 14px; color: var(--mid); line-height: 1.65; }
+    .project-period {
+      margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--rule);
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--mid);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-card {
+      background: var(--white); border: 1px solid var(--rule);
+      border-radius: 12px; padding: 32px;
+      display: flex; align-items: center; gap: 24px; max-width: 520px;
+    }
+    .edu-icon {
+      width: 52px; height: 52px; flex-shrink: 0;
+      background: var(--accent-soft); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+    .edu-degree { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
+    .edu-uni { font-size: 14px; color: var(--mid); }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 48px 5vw;
+      display: flex; flex-wrap: wrap; gap: 16px;
+      align-items: center; justify-content: space-between;
+    }
+    footer p { font-size: 13px; color: var(--mid); }
+    .footer-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px; color: var(--ink);
+    }
+
+    @media (max-width: 600px) {
+      .tl-period { margin-left: 0; }
+      .edu-card { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">surender.reddy</span>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="Surender_Reddy_DataAnalyst_Resume.pdf" download="Surender_Reddy_DataAnalyst_Resume.pdf" class="nav-resume-link">Resume ↓</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrapper">
+  <div class="hero-grid-bg"></div>
+  <header>
+    <div class="hero-left">
+      <p class="hero-eyebrow">Data Analyst · Hyderabad, India</p>
+      <h1>Surender<br><em>Reddy</em></h1>
+      <p class="hero-summary">
+        Power BI specialist with 5+ years turning messy data into decisions. From DAX and star-schema modeling to deployed dashboards — across retail, banking, and energy.
+      </p>
+      <div class="hero-cta-row">
+        <a class="btn-download" href="Surender_Reddy_DataAnalyst_Resume.pdf" download="Surender_Reddy_DataAnalyst_Resume.pdf">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Resume
+        </a>
+      </div>
+      <div class="contact-row">
+        <a class="contact-chip" href="mailto:surender.varakantham@gmail.com">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          Email
+        </a>
+        <a class="contact-chip" href="https://linkedin.com/in/surender-reddy-1854373b4" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a class="contact-chip" href="tel:+919381615982">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.05 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +91 93816 15982
+        </a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-item">
+        <div class="stat-num" id="stat-years">0<span>+</span></div>
+        <div class="stat-label">Years of experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-dash">0<span>+</span></div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+    </div>
+  </header>
+  <div class="hero-bar">
+    <div class="hero-bar-inner">
+      <span class="domain-tag"><span class="domain-dot"></span>Retail Analytics</span>
+      <span class="domain-tag"><span class="domain-dot"></span>Banking &amp; Finance</span>
+      <span class="domain-tag"><span class="domain-dot"></span>Energy Sector</span>
+      <span class="domain-tag"><span class="domain-dot"></span>Survey Intelligence</span>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Technical Stack</p>
+  <h2>Tools &amp; Technologies</h2>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2a5cff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <h3>Power BI</h3>
+      <div class="skill-tags">
+        <span class="tag">Data Modeling</span>
+        <span class="tag">Power Query</span>
+        <span class="tag">Bookmarks</span>
+        <span class="tag">Drill-Through</span>
+        <span class="tag">RLS</span>
+        <span class="tag">Custom Visuals</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2a5cff" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <h3>DAX</h3>
+      <div class="skill-tags">
+        <span class="tag">Measures</span>
+        <span class="tag">Calculated Columns</span>
+        <span class="tag">Time Intelligence</span>
+        <span class="tag">Iteration Fns</span>
+        <span class="tag">DAX Studio</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2a5cff" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+      </div>
+      <h3>SQL Server</h3>
+      <div class="skill-tags">
+        <span class="tag">CTEs</span>
+        <span class="tag">Stored Procs</span>
+        <span class="tag">Indexes</span>
+        <span class="tag">Views</span>
+        <span class="tag">UDFs</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2a5cff" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Python</h3>
+      <div class="skill-tags">
+        <span class="tag">Pandas</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">Data Wrangling</span>
+        <span class="tag">Automation</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2a5cff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+      </div>
+      <h3>Advanced Excel</h3>
+      <div class="skill-tags">
+        <span class="tag">Pivot Tables</span>
+        <span class="tag">VLOOKUP</span>
+        <span class="tag">Power Query</span>
+        <span class="tag">MIS Reports</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2a5cff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <h3>BI Operations</h3>
+      <div class="skill-tags">
+        <span class="tag">Gateway Management</span>
+        <span class="tag">Scheduled Refresh</span>
+        <span class="tag">Workspace Publishing</span>
+        <span class="tag">SSIS</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Career History</p>
+  <h2>Professional Experience</h2>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">
+        <span class="tl-role">Data Analyst</span>
+        <span class="tl-company">Axiora Global Solutions</span>
+        <span class="tl-period">Feb 2023 – Present</span>
+      </div>
+      <ul class="tl-bullets">
+        <li>Built interactive Power BI dashboards with KPIs, slicers, and custom DAX measures to drive data-driven decisions for stakeholders.</li>
+        <li>Optimized data models using star schema design, cutting dashboard refresh times and improving user experience significantly.</li>
+        <li>Automated reporting workflows with Python (Pandas, NumPy), reducing manual processing time and improving report consistency.</li>
+        <li>Developed optimized SQL queries for data extraction, joining, filtering, and validation across relational databases.</li>
+        <li>Performed data quality checks and reconciliation across multiple sources before reporting delivery.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">
+        <span class="tl-role">Consultant</span>
+        <span class="tl-company">Capgemini Technology Services</span>
+        <span class="tl-period">Jan 2022 – Jan 2023</span>
+      </div>
+      <ul class="tl-bullets">
+        <li>Gathered client requirements and built multi-source data models from flat files and databases.</li>
+        <li>Produced daily, weekly, monthly, and quarterly reports from SQL Server and the Group Data Warehouse (GDW).</li>
+        <li>Merged survey data from ~64 countries into a single consolidated dataset for global reporting.</li>
+        <li>Managed deployment, scheduling, and monitoring of dataset refreshes across on-premise gateways.</li>
+        <li>Developed monthly and trend reports in Power BI using charts, slicers, filters, and KPI scorecards.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">
+        <span class="tl-role">Assistant Manager</span>
+        <span class="tl-company">Kotak Mahindra Bank</span>
+        <span class="tl-period">Dec 2019 – Sep 2021</span>
+      </div>
+      <ul class="tl-bullets">
+        <li>Coordinated corporate salary account acquisition and onboarding across clients, internal sales teams, and operations.</li>
+        <li>Maintained MIS reports in Excel to track sales pipeline, account activations, and team performance vs. targets.</li>
+        <li>Served as single point of contact for corporate clients, resolving queries end-to-end.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">
+        <span class="tl-role">Supervisor</span>
+        <span class="tl-company">Data Link Consultancy</span>
+        <span class="tl-period">Jan 2016 – Aug 2019</span>
+      </div>
+      <ul class="tl-bullets">
+        <li>Supervised on-site banking process operations at Axis Bank as part of a third-party vendor team.</li>
+        <li>Managed barcode-based scanning and category-wise indexing of loan documents for digitization.</li>
+        <li>Coordinated upload of scanned records to Axis Bank's document portal for digital review.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Featured Work</p>
+  <h2>Projects</h2>
+  <div class="projects-grid">
+
+    <!-- ============ PROJECT 1: DATA QUALITY ============ -->
+    <div class="project-card" onclick="openLightbox('dq')">
+      <div class="project-thumb">
+        <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+          <rect width="600" height="420" fill="#f3f2f1"/>
+          <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+          <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Data Quality Monitor</text>
+          <circle cx="560" cy="20" r="3" fill="#107c10"/>
+          <text x="568" y="23" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#c8c6c4">Live</text>
+          <rect x="16" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Completeness</text>
+          <text x="28" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#252423">94%</text>
+          <rect x="28" y="112" width="112" height="5" rx="2" fill="#edebe9"/>
+          <rect x="28" y="112" width="105" height="5" rx="2" fill="#107c10"/>
+          <rect x="160" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="172" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Accuracy</text>
+          <text x="172" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#252423">88%</text>
+          <rect x="172" y="112" width="112" height="5" rx="2" fill="#edebe9"/>
+          <rect x="172" y="112" width="98" height="5" rx="2" fill="#0078d4"/>
+          <rect x="304" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="316" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Duplicate Rate</text>
+          <text x="316" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#a4262c">3.1%</text>
+          <rect x="316" y="112" width="112" height="5" rx="2" fill="#edebe9"/>
+          <rect x="316" y="112" width="18" height="5" rx="2" fill="#a4262c"/>
+          <rect x="448" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="460" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Consistency</text>
+          <text x="460" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#252423">91%</text>
+          <rect x="460" y="112" width="112" height="5" rx="2" fill="#edebe9"/>
+          <rect x="460" y="112" width="102" height="5" rx="2" fill="#107c10"/>
+          <rect x="16" y="142" width="278" height="140" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Issues by Data Source</text>
+          <rect x="28" y="178" width="252" height="13" fill="#0078d4"/>
+          <rect x="28" y="200" width="120" height="13" fill="#0078d4"/>
+          <rect x="28" y="222" width="80" height="13" fill="#0078d4"/>
+          <rect x="28" y="244" width="200" height="13" fill="#a4262c"/>
+          <rect x="304" y="142" width="280" height="140" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="316" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Quality Score — 30-Day Trend</text>
+          <polygon points="320,260 350,250 380,258 410,225 440,235 470,205 500,215 530,190 560,195 560,270 320,270" fill="#107c10" opacity="0.12"/>
+          <polyline points="320,260 350,250 380,258 410,225 440,235 470,205 500,215 530,190 560,195" fill="none" stroke="#107c10" stroke-width="2.5"/>
+          <circle cx="560" cy="195" r="3.5" fill="#107c10"/>
+          <rect x="16" y="294" width="568" height="110" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Dataset Audit Log</text>
+          <text x="28" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Dataset</text>
+          <text x="220" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Records</text>
+          <text x="340" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Status</text>
+          <line x1="28" y1="342" x2="572" y2="342" stroke="#e1dfdd"/>
+          <text x="28" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Customer Master</text>
+          <text x="220" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">48,210</text>
+          <circle cx="346" cy="354" r="3.5" fill="#107c10"/><text x="356" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Clean</text>
+          <text x="28" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Transaction Log</text>
+          <text x="220" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">112,560</text>
+          <circle cx="346" cy="374" r="3.5" fill="#ffb900"/><text x="356" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Review</text>
+          <text x="28" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Product Catalog</text>
+          <text x="220" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">6,840</text>
+          <circle cx="346" cy="394" r="3.5" fill="#a4262c"/><text x="356" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Flagged</text>
+        </svg>
+      </div>
+      <p class="project-type">Power BI · Data Quality</p>
+      <h3>Data Quality Dashboard</h3>
+      <p>Monitors completeness, accuracy, duplication, and consistency across key business datasets. Used Power Query to profile and cleanse incoming data, and DAX conditional formatting to surface issues — dramatically reducing time spent on manual audits.</p>
+      <p class="project-zoom-hint">View 2-page report ↗</p>
+    </div>
+
+    <!-- ============ PROJECT 2: SALES PERFORMANCE ============ -->
+    <div class="project-card" onclick="openLightbox('sales')">
+      <div class="project-thumb">
+        <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+          <rect width="600" height="420" fill="#f3f2f1"/>
+          <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+          <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Sales Performance</text>
+          <circle cx="560" cy="20" r="3" fill="#107c10"/>
+          <text x="568" y="23" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#c8c6c4">Live</text>
+          <rect x="16" y="54" width="182" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Revenue (YTD)</text>
+          <text x="28" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#252423">₹4.8 Cr</text>
+          <text x="28" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#107c10">▲ 18.4% YoY</text>
+          <rect x="208" y="54" width="182" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="220" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Target Achievement</text>
+          <text x="220" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#0078d4">112%</text>
+          <rect x="220" y="112" width="150" height="5" rx="2" fill="#edebe9"/>
+          <rect x="220" y="112" width="150" height="5" rx="2" fill="#0078d4"/>
+          <rect x="400" y="54" width="184" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="412" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Avg. Deal Size</text>
+          <text x="412" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#252423">₹3.2 L</text>
+          <text x="412" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#107c10">▲ 6.1% QoQ</text>
+          <rect x="16" y="142" width="340" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Revenue by Region — Monthly</text>
+          <line x1="28" y1="270" x2="340" y2="270" stroke="#c8c6c4"/>
+          <rect x="40" y="220" width="20" height="50" fill="#0078d4"/><rect x="64" y="190" width="20" height="80" fill="#c7e0f4"/>
+          <rect x="98" y="210" width="20" height="60" fill="#0078d4"/><rect x="122" y="175" width="20" height="95" fill="#c7e0f4"/>
+          <rect x="156" y="195" width="20" height="75" fill="#0078d4"/><rect x="180" y="160" width="20" height="110" fill="#c7e0f4"/>
+          <rect x="214" y="230" width="20" height="40" fill="#0078d4"/><rect x="238" y="205" width="20" height="65" fill="#c7e0f4"/>
+          <rect x="272" y="150" width="20" height="120" fill="#107c10"/><rect x="296" y="180" width="20" height="90" fill="#c7e0f4"/>
+          <text x="44" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">North</text>
+          <text x="100" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">South</text>
+          <text x="160" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">East</text>
+          <text x="216" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">West</text>
+          <text x="270" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Central</text>
+          <rect x="364" y="142" width="220" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="376" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Product Mix</text>
+          <circle cx="430" cy="225" r="42" fill="none" stroke="#0078d4" stroke-width="16" stroke-dasharray="142 264"/>
+          <circle cx="430" cy="225" r="42" fill="none" stroke="#107c10" stroke-width="16" stroke-dasharray="92 264" stroke-dashoffset="-142"/>
+          <circle cx="430" cy="225" r="42" fill="none" stroke="#ffb900" stroke-width="16" stroke-dasharray="30 264" stroke-dashoffset="-234"/>
+          <rect x="488" y="200" width="8" height="8" fill="#0078d4"/><text x="500" y="208" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Analytics 54%</text>
+          <rect x="488" y="218" width="8" height="8" fill="#107c10"/><text x="500" y="226" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Platform 35%</text>
+          <rect x="488" y="236" width="8" height="8" fill="#ffb900"/><text x="500" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Support 11%</text>
+          <rect x="16" y="306" width="568" height="98" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="326" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Revenue Trend — 12 Months</text>
+          <polygon points="40,388 95,372 150,378 205,350 260,358 315,330 370,335 425,310 480,318 535,295 580,300 580,392 40,392" fill="#0078d4" opacity="0.1"/>
+          <polyline points="40,388 95,372 150,378 205,350 260,358 315,330 370,335 425,310 480,318 535,295 580,300" fill="none" stroke="#0078d4" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <p class="project-type">Power BI · Sales Analytics</p>
+      <h3>Sales Performance Dashboard</h3>
+      <p>Interactive dashboard tracking sales across regions, products, and time periods. DAX measures for revenue growth, target vs. achievement, and period-over-period comparisons. Drill-through pages replaced static Excel reports with a live, refreshable solution.</p>
+      <p class="project-zoom-hint">View 2-page report ↗</p>
+    </div>
+
+    <!-- ============ PROJECT 3: HR ATTRITION ============ -->
+    <div class="project-card" onclick="openLightbox('hr')">
+      <div class="project-thumb">
+        <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+          <rect width="600" height="420" fill="#f3f2f1"/>
+          <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+          <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">HR Attrition &amp; Headcount</text>
+          <circle cx="560" cy="20" r="3" fill="#107c10"/>
+          <text x="568" y="23" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#c8c6c4">Live</text>
+          <rect x="16" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Headcount</text>
+          <text x="28" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#252423">1,248</text>
+          <text x="28" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#0078d4">▲ 64 this qtr</text>
+          <rect x="160" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="172" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Attrition Rate</text>
+          <text x="172" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#a4262c">8.2%</text>
+          <text x="172" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a4262c">▼ vs 9.5% LY</text>
+          <rect x="304" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="316" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">New Hires</text>
+          <text x="316" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#107c10">64</text>
+          <rect x="448" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="460" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Avg. Tenure</text>
+          <text x="460" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#252423">3.4 yrs</text>
+          <rect x="16" y="142" width="278" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Attrition Heatmap by Dept / Qtr</text>
+          <rect x="28" y="178" width="44" height="22" fill="#107c10"/><rect x="74" y="178" width="44" height="22" fill="#ffb900"/><rect x="120" y="178" width="44" height="22" fill="#a4262c"/><rect x="166" y="178" width="44" height="22" fill="#107c10"/><rect x="212" y="178" width="44" height="22" fill="#107c10"/>
+          <rect x="28" y="202" width="44" height="22" fill="#ffb900"/><rect x="74" y="202" width="44" height="22" fill="#107c10"/><rect x="120" y="202" width="44" height="22" fill="#107c10"/><rect x="166" y="202" width="44" height="22" fill="#a4262c"/><rect x="212" y="202" width="44" height="22" fill="#ffb900"/>
+          <rect x="28" y="226" width="44" height="22" fill="#107c10"/><rect x="74" y="226" width="44" height="22" fill="#107c10"/><rect x="120" y="226" width="44" height="22" fill="#ffb900"/><rect x="166" y="226" width="44" height="22" fill="#107c10"/><rect x="212" y="226" width="44" height="22" fill="#a4262c"/>
+          <text x="28" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Eng</text><text x="76" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Sales</text><text x="122" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Ops</text><text x="170" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Supp</text><text x="214" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Fin</text>
+          <rect x="304" y="142" width="280" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="316" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Headcount Trend — 12 Months</text>
+          <polygon points="320,270 350,260 380,265 410,235 440,245 470,215 500,222 530,195 560,200 560,275 320,275" fill="#0078d4" opacity="0.1"/>
+          <polyline points="320,270 350,260 380,265 410,235 440,245 470,215 500,222 530,195 560,200" fill="none" stroke="#0078d4" stroke-width="2.5"/>
+          <circle cx="560" cy="200" r="3.5" fill="#0078d4"/>
+          <rect x="16" y="306" width="568" height="98" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="326" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Headcount by Department</text>
+          <text x="28" y="346" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Engineering</text>
+          <rect x="120" y="338" width="240" height="11" rx="1" fill="#0078d4"/>
+          <text x="28" y="366" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Sales</text>
+          <rect x="120" y="358" width="170" height="11" rx="1" fill="#0078d4"/>
+          <text x="28" y="386" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Operations</text>
+          <rect x="120" y="378" width="200" height="11" rx="1" fill="#0078d4"/>
+        </svg>
+      </div>
+      <p class="project-type">Power BI · Workforce Analytics</p>
+      <h3>HR Attrition &amp; Headcount Dashboard</h3>
+      <p>Tracked headcount, attrition rate, and department-wise hiring trends with KPI scorecards and heat maps. Built DAX time intelligence measures for month-over-month and year-over-year comparisons, with RLS to restrict views by department manager.</p>
+      <p class="project-zoom-hint">View 2-page report ↗</p>
+    </div>
+
+    <!-- ============ PROJECT 4: CORPORATE ONBOARDING ============ -->
+    <div class="project-card" onclick="openLightbox('bank')">
+      <div class="project-thumb">
+        <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+          <rect width="600" height="420" fill="#f3f2f1"/>
+          <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+          <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Corporate Account Onboarding</text>
+          <circle cx="560" cy="20" r="3" fill="#107c10"/>
+          <text x="568" y="23" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#c8c6c4">Live</text>
+          <rect x="16" y="54" width="182" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Accounts Opened</text>
+          <text x="28" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#252423">312</text>
+          <text x="28" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#107c10">▲ 12% MoM</text>
+          <rect x="208" y="54" width="182" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="220" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Avg. Turnaround</text>
+          <text x="220" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#252423">4.2 d</text>
+          <text x="220" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#107c10">▼ 0.6d improved</text>
+          <rect x="400" y="54" width="184" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="412" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Target Achievement</text>
+          <text x="412" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#107c10">96%</text>
+          <rect x="412" y="112" width="150" height="5" rx="2" fill="#edebe9"/>
+          <rect x="412" y="112" width="144" height="5" rx="2" fill="#107c10"/>
+          <rect x="16" y="142" width="278" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Onboarding by Team</text>
+          <line x1="28" y1="270" x2="280" y2="270" stroke="#c8c6c4"/>
+          <line x1="28" y1="178" x2="28" y2="270" stroke="#c8c6c4"/>
+          <text x="32" y="190" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Team A</text>
+          <rect x="84" y="182" width="180" height="14" fill="#0078d4"/>
+          <text x="32" y="214" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Team B</text>
+          <rect x="84" y="206" width="128" height="14" fill="#0078d4"/>
+          <text x="32" y="238" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Team C</text>
+          <rect x="84" y="230" width="192" height="14" fill="#107c10"/>
+          <text x="32" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Team D</text>
+          <rect x="84" y="254" width="88" height="14" fill="#0078d4"/>
+          <rect x="304" y="142" width="280" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="316" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Pipeline Stage Progress</text>
+          <text x="316" y="182" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Document Collection</text>
+          <rect x="316" y="186" width="252" height="13" rx="2" fill="#edebe9"/>
+          <rect x="316" y="186" width="202" height="13" rx="2" fill="#0078d4"/>
+          <text x="316" y="212" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">KYC Verification</text>
+          <rect x="316" y="216" width="252" height="13" rx="2" fill="#edebe9"/>
+          <rect x="316" y="216" width="150" height="13" rx="2" fill="#107c10"/>
+          <text x="316" y="242" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Approval</text>
+          <rect x="316" y="246" width="252" height="13" rx="2" fill="#edebe9"/>
+          <rect x="316" y="246" width="100" height="13" rx="2" fill="#ffb900"/>
+          <text x="316" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Account Activation</text>
+          <rect x="316" y="276" width="252" height="13" rx="2" fill="#edebe9"/>
+          <rect x="316" y="276" width="58" height="13" rx="2" fill="#a4262c"/>
+          <rect x="16" y="306" width="568" height="98" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+          <text x="28" y="326" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Onboarding Volume — 12 Months</text>
+          <polyline points="40,388 95,378 150,382 205,360 260,365 315,345 370,350 425,330 480,335 535,318 580,322" fill="none" stroke="#0078d4" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <p class="project-type">Power BI · Banking Operations</p>
+      <h3>Corporate Account Onboarding Tracker</h3>
+      <p>Built a Power BI dashboard to monitor corporate account acquisition, onboarding turnaround, and team performance against monthly targets. Used bookmarks and drill-through pages so relationship managers could view client-level detail in one click.</p>
+      <p class="project-zoom-hint">View 2-page report ↗</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== HIDDEN FULL-SIZE DASHBOARD PAGES ===================== -->
+<div style="display:none;">
+
+  <!-- DQ — Page 1: Overview (reuse thumbnail content, full-detail version) -->
+  <div id="dq-p0">
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="420" fill="#f3f2f1"/>
+      <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+      <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Data Quality Monitor — Overview</text>
+      <circle cx="560" cy="20" r="3" fill="#107c10"/><text x="568" y="23" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#c8c6c4">Live</text>
+      <rect x="16" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Completeness</text>
+      <text x="28" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#252423">94%</text>
+      <rect x="28" y="112" width="112" height="5" rx="2" fill="#edebe9"/><rect x="28" y="112" width="105" height="5" rx="2" fill="#107c10"/>
+      <rect x="160" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="172" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Accuracy</text>
+      <text x="172" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#252423">88%</text>
+      <rect x="172" y="112" width="112" height="5" rx="2" fill="#edebe9"/><rect x="172" y="112" width="98" height="5" rx="2" fill="#0078d4"/>
+      <rect x="304" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Duplicate Rate</text>
+      <text x="316" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#a4262c">3.1%</text>
+      <rect x="316" y="112" width="112" height="5" rx="2" fill="#edebe9"/><rect x="316" y="112" width="18" height="5" rx="2" fill="#a4262c"/>
+      <rect x="448" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="460" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Consistency</text>
+      <text x="460" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#252423">91%</text>
+      <rect x="460" y="112" width="112" height="5" rx="2" fill="#edebe9"/><rect x="460" y="112" width="102" height="5" rx="2" fill="#107c10"/>
+      <rect x="16" y="142" width="278" height="140" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Issues by Data Source</text>
+      <text x="28" y="180" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#605e5c">SQL Server</text><rect x="28" y="184" width="252" height="13" fill="#0078d4"/>
+      <text x="28" y="202" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#605e5c">SharePoint</text><rect x="28" y="206" width="120" height="13" fill="#0078d4"/>
+      <text x="28" y="224" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#605e5c">Excel</text><rect x="28" y="228" width="80" height="13" fill="#0078d4"/>
+      <text x="28" y="246" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#605e5c">CSV Files</text><rect x="28" y="250" width="200" height="13" fill="#a4262c"/>
+      <rect x="304" y="142" width="280" height="140" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Quality Score — 30-Day Trend</text>
+      <polygon points="320,260 350,250 380,258 410,225 440,235 470,205 500,215 530,190 560,195 560,270 320,270" fill="#107c10" opacity="0.12"/>
+      <polyline points="320,260 350,250 380,258 410,225 440,235 470,205 500,215 530,190 560,195" fill="none" stroke="#107c10" stroke-width="2.5"/>
+      <circle cx="560" cy="195" r="3.5" fill="#107c10"/>
+      <rect x="16" y="294" width="568" height="110" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Dataset Audit Log</text>
+      <text x="28" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Dataset</text><text x="220" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Records</text><text x="340" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Status</text>
+      <line x1="28" y1="342" x2="572" y2="342" stroke="#e1dfdd"/>
+      <text x="28" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Customer Master</text><text x="220" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">48,210</text>
+      <circle cx="346" cy="354" r="3.5" fill="#107c10"/><text x="356" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Clean</text>
+      <text x="28" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Transaction Log</text><text x="220" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">112,560</text>
+      <circle cx="346" cy="374" r="3.5" fill="#ffb900"/><text x="356" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Review</text>
+      <text x="28" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Product Catalog</text><text x="220" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">6,840</text>
+      <circle cx="346" cy="394" r="3.5" fill="#a4262c"/><text x="356" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Flagged</text>
+    </svg>
+  </div>
+
+  <!-- DQ — Page 2: Source Detail -->
+  <div id="dq-p1">
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="420" fill="#f3f2f1"/>
+      <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+      <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Data Quality Monitor — Source Detail</text>
+      <rect x="460" y="9" width="120" height="22" rx="3" fill="#3a3937"/><text x="470" y="24" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#c8c6c4">Filter: All Sources ▾</text>
+      <rect x="16" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Total Records</text>
+      <text x="28" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#252423">167,610</text>
+      <rect x="160" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="172" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Flagged Rows</text>
+      <text x="172" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#a4262c">5,196</text>
+      <rect x="304" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Auto-Resolved</text>
+      <text x="316" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#107c10">3,840</text>
+      <rect x="448" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="460" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Avg. Resolve Time</text>
+      <text x="460" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#252423">1.8 hr</text>
+      <rect x="16" y="132" width="220" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Issue Type Mix</text>
+      <circle cx="80" cy="218" r="44" fill="none" stroke="#0078d4" stroke-width="17" stroke-dasharray="142 276"/>
+      <circle cx="80" cy="218" r="44" fill="none" stroke="#a4262c" stroke-width="17" stroke-dasharray="78 276" stroke-dashoffset="-142"/>
+      <circle cx="80" cy="218" r="44" fill="none" stroke="#ffb900" stroke-width="17" stroke-dasharray="56 276" stroke-dashoffset="-220"/>
+      <rect x="140" y="194" width="8" height="8" fill="#0078d4"/><text x="152" y="202" font-family="Segoe UI, Arial, sans-serif" font-size="7.5" fill="#605e5c">Missing 51%</text>
+      <rect x="140" y="210" width="8" height="8" fill="#a4262c"/><text x="152" y="218" font-family="Segoe UI, Arial, sans-serif" font-size="7.5" fill="#605e5c">Format 28%</text>
+      <rect x="140" y="226" width="8" height="8" fill="#ffb900"/><text x="152" y="234" font-family="Segoe UI, Arial, sans-serif" font-size="7.5" fill="#605e5c">Dupes 21%</text>
+      <rect x="244" y="132" width="340" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="256" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Flagged Records by Field</text>
+      <text x="256" y="172" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Email</text><rect x="320" y="164" width="240" height="12" rx="1" fill="#edebe9"/><rect x="320" y="164" width="190" height="12" rx="1" fill="#a4262c"/>
+      <text x="256" y="196" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Phone</text><rect x="320" y="188" width="240" height="12" rx="1" fill="#edebe9"/><rect x="320" y="188" width="120" height="12" rx="1" fill="#ffb900"/>
+      <text x="256" y="220" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Address</text><rect x="320" y="212" width="240" height="12" rx="1" fill="#edebe9"/><rect x="320" y="212" width="80" height="12" rx="1" fill="#0078d4"/>
+      <text x="256" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Tax ID</text><rect x="320" y="236" width="240" height="12" rx="1" fill="#edebe9"/><rect x="320" y="236" width="50" height="12" rx="1" fill="#107c10"/>
+      <text x="256" y="268" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Date Fields</text><rect x="320" y="260" width="240" height="12" rx="1" fill="#edebe9"/><rect x="320" y="260" width="100" height="12" rx="1" fill="#ffb900"/>
+      <rect x="16" y="294" width="568" height="110" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Resolution Tracker</text>
+      <text x="28" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Issue ID</text><text x="140" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Field</text><text x="280" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Owner</text><text x="420" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Status</text>
+      <line x1="28" y1="342" x2="572" y2="342" stroke="#e1dfdd"/>
+      <text x="28" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">DQ-1042</text><text x="140" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Email</text><text x="280" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">S. Reddy</text>
+      <rect x="420" y="349" width="66" height="14" rx="7" fill="#fde7e9"/><text x="430" y="359" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a4262c">Open</text>
+      <text x="28" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">DQ-1039</text><text x="140" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Phone</text><text x="280" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">A. Kumar</text>
+      <rect x="420" y="369" width="66" height="14" rx="7" fill="#fff4ce"/><text x="430" y="379" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#9d5d00">Review</text>
+      <text x="28" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">DQ-1031</text><text x="140" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Tax ID</text><text x="280" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">S. Reddy</text>
+      <rect x="420" y="389" width="66" height="14" rx="7" fill="#dff6dd"/><text x="430" y="399" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#107c10">Resolved</text>
+    </svg>
+  </div>
+
+  <!-- SALES — Page 1: Overview -->
+  <div id="sales-p0">
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="420" fill="#f3f2f1"/>
+      <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+      <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Sales Performance — Overview</text>
+      <circle cx="560" cy="20" r="3" fill="#107c10"/><text x="568" y="23" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#c8c6c4">Live</text>
+      <rect x="16" y="54" width="182" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Revenue (YTD)</text>
+      <text x="28" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#252423">₹4.8 Cr</text>
+      <text x="28" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#107c10">▲ 18.4% YoY</text>
+      <rect x="208" y="54" width="182" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="220" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Target Achievement</text>
+      <text x="220" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#0078d4">112%</text>
+      <rect x="220" y="112" width="150" height="5" rx="2" fill="#edebe9"/><rect x="220" y="112" width="150" height="5" rx="2" fill="#0078d4"/>
+      <rect x="400" y="54" width="184" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="412" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Avg. Deal Size</text>
+      <text x="412" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#252423">₹3.2 L</text>
+      <text x="412" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#107c10">▲ 6.1% QoQ</text>
+      <rect x="16" y="142" width="340" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Revenue by Region — Current vs Prior</text>
+      <line x1="28" y1="270" x2="340" y2="270" stroke="#c8c6c4"/>
+      <rect x="40" y="220" width="20" height="50" fill="#0078d4"/><rect x="64" y="190" width="20" height="80" fill="#c7e0f4"/>
+      <rect x="98" y="210" width="20" height="60" fill="#0078d4"/><rect x="122" y="175" width="20" height="95" fill="#c7e0f4"/>
+      <rect x="156" y="195" width="20" height="75" fill="#0078d4"/><rect x="180" y="160" width="20" height="110" fill="#c7e0f4"/>
+      <rect x="214" y="230" width="20" height="40" fill="#0078d4"/><rect x="238" y="205" width="20" height="65" fill="#c7e0f4"/>
+      <rect x="272" y="150" width="20" height="120" fill="#107c10"/><rect x="296" y="180" width="20" height="90" fill="#c7e0f4"/>
+      <text x="44" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">North</text><text x="100" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">South</text>
+      <text x="160" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">East</text><text x="216" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">West</text><text x="270" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Central</text>
+      <rect x="364" y="142" width="220" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="376" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Product Mix</text>
+      <circle cx="430" cy="225" r="42" fill="none" stroke="#0078d4" stroke-width="16" stroke-dasharray="142 264"/>
+      <circle cx="430" cy="225" r="42" fill="none" stroke="#107c10" stroke-width="16" stroke-dasharray="92 264" stroke-dashoffset="-142"/>
+      <circle cx="430" cy="225" r="42" fill="none" stroke="#ffb900" stroke-width="16" stroke-dasharray="30 264" stroke-dashoffset="-234"/>
+      <rect x="488" y="200" width="8" height="8" fill="#0078d4"/><text x="500" y="208" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Analytics 54%</text>
+      <rect x="488" y="218" width="8" height="8" fill="#107c10"/><text x="500" y="226" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Platform 35%</text>
+      <rect x="488" y="236" width="8" height="8" fill="#ffb900"/><text x="500" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Support 11%</text>
+      <rect x="16" y="306" width="568" height="98" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="326" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Revenue Trend — 12 Months</text>
+      <polygon points="40,388 95,372 150,378 205,350 260,358 315,330 370,335 425,310 480,318 535,295 580,300 580,392 40,392" fill="#0078d4" opacity="0.1"/>
+      <polyline points="40,388 95,372 150,378 205,350 260,358 315,330 370,335 425,310 480,318 535,295 580,300" fill="none" stroke="#0078d4" stroke-width="2.5"/>
+    </svg>
+  </div>
+
+  <!-- SALES — Page 2: Region Detail -->
+  <div id="sales-p1">
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="420" fill="#f3f2f1"/>
+      <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+      <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Sales Performance — Region Detail</text>
+      <rect x="460" y="9" width="120" height="22" rx="3" fill="#3a3937"/><text x="470" y="24" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#c8c6c4">Region: North ▾</text>
+      <rect x="16" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Region Revenue</text>
+      <text x="28" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#252423">₹1.1 Cr</text>
+      <rect x="160" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="172" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Deals Closed</text>
+      <text x="172" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#252423">38</text>
+      <rect x="304" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Win Rate</text>
+      <text x="316" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#107c10">62%</text>
+      <rect x="448" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="460" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Pipeline Value</text>
+      <text x="460" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#252423">₹2.4 Cr</text>
+      <rect x="16" y="132" width="280" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Top Sales Reps — Region</text>
+      <text x="28" y="172" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">R. Sharma</text><rect x="100" y="164" width="180" height="12" rx="1" fill="#edebe9"/><rect x="100" y="164" width="150" height="12" rx="1" fill="#0078d4"/>
+      <text x="28" y="196" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">P. Iyer</text><rect x="100" y="188" width="180" height="12" rx="1" fill="#edebe9"/><rect x="100" y="188" width="120" height="12" rx="1" fill="#0078d4"/>
+      <text x="28" y="220" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">N. Verma</text><rect x="100" y="212" width="180" height="12" rx="1" fill="#edebe9"/><rect x="100" y="212" width="95" height="12" rx="1" fill="#0078d4"/>
+      <text x="28" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">K. Joshi</text><rect x="100" y="236" width="180" height="12" rx="1" fill="#edebe9"/><rect x="100" y="236" width="70" height="12" rx="1" fill="#0078d4"/>
+      <text x="28" y="268" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">A. Singh</text><rect x="100" y="260" width="180" height="12" rx="1" fill="#edebe9"/><rect x="100" y="260" width="50" height="12" rx="1" fill="#0078d4"/>
+      <rect x="304" y="132" width="280" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Funnel — Lead to Close</text>
+      <polygon points="316,168 568,168 540,196 344,196" fill="#0078d4"/><text x="430" y="187" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#ffffff" text-anchor="middle">Leads · 420</text>
+      <polygon points="344,200 540,200 514,224 370,224" fill="#3a96dd"/><text x="430" y="217" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#ffffff" text-anchor="middle">Qualified · 260</text>
+      <polygon points="370,228 514,228 492,250 392,250" fill="#75b9ea"/><text x="430" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#252423" text-anchor="middle">Proposal · 142</text>
+      <polygon points="392,254 492,254 472,278 412,278" fill="#107c10"/><text x="430" y="270" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#ffffff" text-anchor="middle">Closed · 38</text>
+      <rect x="16" y="294" width="568" height="110" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Deal Detail — Top Accounts</text>
+      <text x="28" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Account</text><text x="220" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Value</text><text x="340" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Rep</text><text x="460" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Stage</text>
+      <line x1="28" y1="342" x2="572" y2="342" stroke="#e1dfdd"/>
+      <text x="28" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Veridian Corp</text><text x="220" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">₹18.4L</text><text x="340" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">R. Sharma</text>
+      <rect x="460" y="349" width="66" height="14" rx="7" fill="#dff6dd"/><text x="470" y="359" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#107c10">Closed</text>
+      <text x="28" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Northwind Ltd</text><text x="220" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">₹12.0L</text><text x="340" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">P. Iyer</text>
+      <rect x="460" y="369" width="66" height="14" rx="7" fill="#fff4ce"/><text x="470" y="379" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#9d5d00">Proposal</text>
+      <text x="28" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Orbit Systems</text><text x="220" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">₹9.6L</text><text x="340" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">N. Verma</text>
+      <rect x="460" y="389" width="66" height="14" rx="7" fill="#deecf9"/><text x="470" y="399" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#0078d4">Qualified</text>
+    </svg>
+  </div>
+
+  <!-- HR — Page 1: Overview -->
+  <div id="hr-p0">
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="420" fill="#f3f2f1"/>
+      <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+      <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">HR Attrition &amp; Headcount — Overview</text>
+      <circle cx="560" cy="20" r="3" fill="#107c10"/><text x="568" y="23" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#c8c6c4">Live</text>
+      <rect x="16" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Headcount</text>
+      <text x="28" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#252423">1,248</text>
+      <text x="28" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#0078d4">▲ 64 this qtr</text>
+      <rect x="160" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="172" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Attrition Rate</text>
+      <text x="172" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#a4262c">8.2%</text>
+      <text x="172" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a4262c">▼ vs 9.5% LY</text>
+      <rect x="304" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">New Hires</text>
+      <text x="316" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#107c10">64</text>
+      <rect x="448" y="54" width="136" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="460" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Avg. Tenure</text>
+      <text x="460" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#252423">3.4 yrs</text>
+      <rect x="16" y="142" width="278" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Attrition Heatmap by Dept / Qtr</text>
+      <rect x="28" y="178" width="44" height="22" fill="#107c10"/><rect x="74" y="178" width="44" height="22" fill="#ffb900"/><rect x="120" y="178" width="44" height="22" fill="#a4262c"/><rect x="166" y="178" width="44" height="22" fill="#107c10"/><rect x="212" y="178" width="44" height="22" fill="#107c10"/>
+      <rect x="28" y="202" width="44" height="22" fill="#ffb900"/><rect x="74" y="202" width="44" height="22" fill="#107c10"/><rect x="120" y="202" width="44" height="22" fill="#107c10"/><rect x="166" y="202" width="44" height="22" fill="#a4262c"/><rect x="212" y="202" width="44" height="22" fill="#ffb900"/>
+      <rect x="28" y="226" width="44" height="22" fill="#107c10"/><rect x="74" y="226" width="44" height="22" fill="#107c10"/><rect x="120" y="226" width="44" height="22" fill="#ffb900"/><rect x="166" y="226" width="44" height="22" fill="#107c10"/><rect x="212" y="226" width="44" height="22" fill="#a4262c"/>
+      <text x="28" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Eng</text><text x="76" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Sales</text><text x="122" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Ops</text><text x="170" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Supp</text><text x="214" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a19f9d">Fin</text>
+      <rect x="304" y="142" width="280" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Headcount Trend — 12 Months</text>
+      <polygon points="320,270 350,260 380,265 410,235 440,245 470,215 500,222 530,195 560,200 560,275 320,275" fill="#0078d4" opacity="0.1"/>
+      <polyline points="320,270 350,260 380,265 410,235 440,245 470,215 500,222 530,195 560,200" fill="none" stroke="#0078d4" stroke-width="2.5"/>
+      <circle cx="560" cy="200" r="3.5" fill="#0078d4"/>
+      <rect x="16" y="306" width="568" height="98" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="326" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Headcount by Department</text>
+      <text x="28" y="346" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Engineering</text><rect x="120" y="338" width="240" height="11" rx="1" fill="#0078d4"/>
+      <text x="28" y="366" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Sales</text><rect x="120" y="358" width="170" height="11" rx="1" fill="#0078d4"/>
+      <text x="28" y="386" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Operations</text><rect x="120" y="378" width="200" height="11" rx="1" fill="#0078d4"/>
+    </svg>
+  </div>
+
+  <!-- HR — Page 2: Department Detail -->
+  <div id="hr-p1">
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="420" fill="#f3f2f1"/>
+      <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+      <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">HR Attrition &amp; Headcount — Department Detail</text>
+      <rect x="460" y="9" width="120" height="22" rx="3" fill="#3a3937"/><text x="470" y="24" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#c8c6c4">Dept: Engineering ▾</text>
+      <rect x="16" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Dept Headcount</text>
+      <text x="28" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#252423">412</text>
+      <rect x="160" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="172" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Exits This Qtr</text>
+      <text x="172" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#a4262c">14</text>
+      <rect x="304" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Open Reqs</text>
+      <text x="316" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#252423">22</text>
+      <rect x="448" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="460" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Time to Fill</text>
+      <text x="460" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#252423">38 d</text>
+      <rect x="16" y="132" width="280" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Exit Reasons</text>
+      <circle cx="90" cy="216" r="44" fill="none" stroke="#a4262c" stroke-width="17" stroke-dasharray="100 276"/>
+      <circle cx="90" cy="216" r="44" fill="none" stroke="#ffb900" stroke-width="17" stroke-dasharray="80 276" stroke-dashoffset="-100"/>
+      <circle cx="90" cy="216" r="44" fill="none" stroke="#0078d4" stroke-width="17" stroke-dasharray="56 276" stroke-dashoffset="-180"/>
+      <circle cx="90" cy="216" r="44" fill="none" stroke="#107c10" stroke-width="17" stroke-dasharray="40 276" stroke-dashoffset="-236"/>
+      <rect x="150" y="186" width="8" height="8" fill="#a4262c"/><text x="162" y="194" font-family="Segoe UI, Arial, sans-serif" font-size="7.5" fill="#605e5c">Compensation 36%</text>
+      <rect x="150" y="202" width="8" height="8" fill="#ffb900"/><text x="162" y="210" font-family="Segoe UI, Arial, sans-serif" font-size="7.5" fill="#605e5c">Growth 29%</text>
+      <rect x="150" y="218" width="8" height="8" fill="#0078d4"/><text x="162" y="226" font-family="Segoe UI, Arial, sans-serif" font-size="7.5" fill="#605e5c">Relocation 20%</text>
+      <rect x="150" y="234" width="8" height="8" fill="#107c10"/><text x="162" y="242" font-family="Segoe UI, Arial, sans-serif" font-size="7.5" fill="#605e5c">Other 15%</text>
+      <rect x="304" y="132" width="280" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Tenure Distribution</text>
+      <line x1="316" y1="262" x2="568" y2="262" stroke="#c8c6c4"/>
+      <rect x="328" y="220" width="28" height="42" fill="#0078d4"/><rect x="364" y="190" width="28" height="72" fill="#0078d4"/>
+      <rect x="400" y="170" width="28" height="92" fill="#0078d4"/><rect x="436" y="205" width="28" height="57" fill="#0078d4"/>
+      <rect x="472" y="232" width="28" height="30" fill="#0078d4"/><rect x="508" y="248" width="28" height="14" fill="#0078d4"/>
+      <text x="330" y="274" font-family="Segoe UI, Arial, sans-serif" font-size="6.5" fill="#a19f9d">0-1y</text><text x="368" y="274" font-family="Segoe UI, Arial, sans-serif" font-size="6.5" fill="#a19f9d">1-2y</text>
+      <text x="404" y="274" font-family="Segoe UI, Arial, sans-serif" font-size="6.5" fill="#a19f9d">2-3y</text><text x="440" y="274" font-family="Segoe UI, Arial, sans-serif" font-size="6.5" fill="#a19f9d">3-5y</text>
+      <text x="474" y="274" font-family="Segoe UI, Arial, sans-serif" font-size="6.5" fill="#a19f9d">5-8y</text><text x="508" y="274" font-family="Segoe UI, Arial, sans-serif" font-size="6.5" fill="#a19f9d">8y+</text>
+      <rect x="16" y="294" width="568" height="110" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Recent Exits — Engineering</text>
+      <text x="28" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Role</text><text x="220" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Tenure</text><text x="340" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Reason</text><text x="460" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Exit Type</text>
+      <line x1="28" y1="342" x2="572" y2="342" stroke="#e1dfdd"/>
+      <text x="28" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Sr. Developer</text><text x="220" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">2.1 yrs</text><text x="340" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Compensation</text>
+      <rect x="460" y="349" width="66" height="14" rx="7" fill="#fde7e9"/><text x="470" y="359" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a4262c">Voluntary</text>
+      <text x="28" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">QA Engineer</text><text x="220" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">1.4 yrs</text><text x="340" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Growth</text>
+      <rect x="460" y="369" width="66" height="14" rx="7" fill="#fde7e9"/><text x="470" y="379" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a4262c">Voluntary</text>
+      <text x="28" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Team Lead</text><text x="220" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">4.6 yrs</text><text x="340" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Relocation</text>
+      <rect x="460" y="389" width="66" height="14" rx="7" fill="#deecf9"/><text x="470" y="399" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#0078d4">Voluntary</text>
+    </svg>
+  </div>
+
+  <!-- BANK — Page 1: Overview -->
+  <div id="bank-p0">
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="420" fill="#f3f2f1"/>
+      <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+      <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Corporate Account Onboarding — Overview</text>
+      <circle cx="560" cy="20" r="3" fill="#107c10"/><text x="568" y="23" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#c8c6c4">Live</text>
+      <rect x="16" y="54" width="182" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Accounts Opened</text>
+      <text x="28" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#252423">312</text>
+      <text x="28" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#107c10">▲ 12% MoM</text>
+      <rect x="208" y="54" width="182" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="220" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Avg. Turnaround</text>
+      <text x="220" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#252423">4.2 d</text>
+      <text x="220" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#107c10">▼ 0.6d improved</text>
+      <rect x="400" y="54" width="184" height="74" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="412" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Target Achievement</text>
+      <text x="412" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#107c10">96%</text>
+      <rect x="412" y="112" width="150" height="5" rx="2" fill="#edebe9"/><rect x="412" y="112" width="144" height="5" rx="2" fill="#107c10"/>
+      <rect x="16" y="142" width="278" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Onboarding by Team</text>
+      <line x1="28" y1="270" x2="280" y2="270" stroke="#c8c6c4"/><line x1="28" y1="178" x2="28" y2="270" stroke="#c8c6c4"/>
+      <text x="32" y="190" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Team A</text><rect x="84" y="182" width="180" height="14" fill="#0078d4"/>
+      <text x="32" y="214" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Team B</text><rect x="84" y="206" width="128" height="14" fill="#0078d4"/>
+      <text x="32" y="238" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Team C</text><rect x="84" y="230" width="192" height="14" fill="#107c10"/>
+      <text x="32" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Team D</text><rect x="84" y="254" width="88" height="14" fill="#0078d4"/>
+      <rect x="304" y="142" width="280" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="162" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Pipeline Stage Progress</text>
+      <text x="316" y="182" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Document Collection</text><rect x="316" y="186" width="252" height="13" rx="2" fill="#edebe9"/><rect x="316" y="186" width="202" height="13" rx="2" fill="#0078d4"/>
+      <text x="316" y="212" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">KYC Verification</text><rect x="316" y="216" width="252" height="13" rx="2" fill="#edebe9"/><rect x="316" y="216" width="150" height="13" rx="2" fill="#107c10"/>
+      <text x="316" y="242" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Approval</text><rect x="316" y="246" width="252" height="13" rx="2" fill="#edebe9"/><rect x="316" y="246" width="100" height="13" rx="2" fill="#ffb900"/>
+      <text x="316" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Account Activation</text><rect x="316" y="276" width="252" height="13" rx="2" fill="#edebe9"/><rect x="316" y="276" width="58" height="13" rx="2" fill="#a4262c"/>
+      <rect x="16" y="306" width="568" height="98" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="326" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Onboarding Volume — 12 Months</text>
+      <polygon points="40,388 95,378 150,382 205,360 260,365 315,345 370,350 425,330 480,335 535,318 580,322 580,392 40,392" fill="#0078d4" opacity="0.1"/>
+      <polyline points="40,388 95,378 150,382 205,360 260,365 315,345 370,350 425,330 480,335 535,318 580,322" fill="none" stroke="#0078d4" stroke-width="2.5"/>
+    </svg>
+  </div>
+
+  <!-- BANK — Page 2: Pipeline Detail -->
+  <div id="bank-p1">
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="420" fill="#f3f2f1"/>
+      <rect x="0" y="0" width="600" height="40" fill="#252423"/>
+      <text x="18" y="25" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Corporate Account Onboarding — Pipeline Detail</text>
+      <rect x="460" y="9" width="120" height="22" rx="3" fill="#3a3937"/><text x="470" y="24" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#c8c6c4">Team: Team A ▾</text>
+      <rect x="16" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">In Pipeline</text>
+      <text x="28" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#252423">86</text>
+      <rect x="160" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="172" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Stalled &gt;7d</text>
+      <text x="172" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#a4262c">11</text>
+      <rect x="304" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">Activated</text>
+      <text x="316" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#107c10">258</text>
+      <rect x="448" y="54" width="136" height="64" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="460" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#605e5c">SLA Compliance</text>
+      <text x="460" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" fill="#252423">91%</text>
+      <rect x="16" y="132" width="280" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Turnaround Time — Weekly</text>
+      <line x1="28" y1="262" x2="280" y2="262" stroke="#c8c6c4"/>
+      <polyline points="40,230 75,238 110,222 145,245 180,210 215,218 250,196" fill="none" stroke="#0078d4" stroke-width="2.5"/>
+      <circle cx="40" cy="230" r="3" fill="#0078d4"/><circle cx="75" cy="238" r="3" fill="#0078d4"/><circle cx="110" cy="222" r="3" fill="#0078d4"/>
+      <circle cx="145" cy="245" r="3" fill="#0078d4"/><circle cx="180" cy="210" r="3" fill="#0078d4"/><circle cx="215" cy="218" r="3" fill="#0078d4"/><circle cx="250" cy="196" r="3" fill="#107c10"/>
+      <line x1="28" y1="200" x2="280" y2="200" stroke="#a4262c" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="252" y="198" font-family="Segoe UI, Arial, sans-serif" font-size="6.5" fill="#a4262c">SLA: 5d</text>
+      <rect x="304" y="132" width="280" height="150" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="316" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Drop-off by Pipeline Stage</text>
+      <text x="316" y="172" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Doc Collection</text><rect x="400" y="164" width="160" height="12" rx="1" fill="#edebe9"/><rect x="400" y="164" width="24" height="12" rx="1" fill="#a4262c"/>
+      <text x="316" y="196" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">KYC Verification</text><rect x="400" y="188" width="160" height="12" rx="1" fill="#edebe9"/><rect x="400" y="188" width="40" height="12" rx="1" fill="#a4262c"/>
+      <text x="316" y="220" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Approval</text><rect x="400" y="212" width="160" height="12" rx="1" fill="#edebe9"/><rect x="400" y="212" width="60" height="12" rx="1" fill="#ffb900"/>
+      <text x="316" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#605e5c">Activation</text><rect x="400" y="236" width="160" height="12" rx="1" fill="#edebe9"/><rect x="400" y="236" width="14" height="12" rx="1" fill="#107c10"/>
+      <rect x="16" y="294" width="568" height="110" rx="3" fill="#ffffff" stroke="#e1dfdd"/>
+      <text x="28" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#323130">Stalled Accounts — Action Needed</text>
+      <text x="28" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Client</text><text x="220" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Stage</text><text x="340" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">Days Stalled</text><text x="470" y="334" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="#a19f9d">RM</text>
+      <line x1="28" y1="342" x2="572" y2="342" stroke="#e1dfdd"/>
+      <text x="28" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Meridian Foods</text><text x="220" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">KYC</text>
+      <rect x="340" y="349" width="50" height="14" rx="7" fill="#fde7e9"/><text x="350" y="359" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#a4262c">12 days</text>
+      <text x="470" y="358" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">S. Reddy</text>
+      <text x="28" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Crestline Auto</text><text x="220" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Approval</text>
+      <rect x="340" y="369" width="50" height="14" rx="7" fill="#fff4ce"/><text x="350" y="379" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#9d5d00">9 days</text>
+      <text x="470" y="378" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">A. Kumar</text>
+      <text x="28" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Hilltop Retail</text><text x="220" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">Doc Collection</text>
+      <rect x="340" y="389" width="50" height="14" rx="7" fill="#fff4ce"/><text x="350" y="399" font-family="Segoe UI, Arial, sans-serif" font-size="7" fill="#9d5d00">7 days</text>
+      <text x="470" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#323130">S. Reddy</text>
+    </svg>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="if(event.target===this) closeLightbox()">
+  <div class="lightbox-box" onclick="event.stopPropagation()">
+    <div id="lightboxContent"></div>
+    <div class="lightbox-tabs" id="lightboxTabs"></div>
+    <div class="lightbox-caption">
+      <h4 id="lightboxTitle"></h4>
+      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Academic Background</p>
+  <h2>Education</h2>
+  <div class="edu-card">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <p class="edu-degree">B.Sc. Computer Science</p>
+      <p class="edu-uni">Osmania University, Hyderabad</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-brand">Surender Reddy</p>
+  <p>Data Analyst · Hyderabad, India · <a href="mailto:surender.varakantham@gmail.com" style="color:var(--accent);text-decoration:none;">surender.varakantham@gmail.com</a></p>
+</footer>
+
+<script>
+  const dashboardPages = {
+    dq:    { title: 'Data Quality Dashboard',         pages: ['Overview', 'Source Detail'] },
+    sales: { title: 'Sales Performance Dashboard',    pages: ['Overview', 'Region Detail'] },
+    hr:    { title: 'HR Attrition & Headcount',        pages: ['Overview', 'Department Detail'] },
+    bank:  { title: 'Corporate Onboarding Tracker',   pages: ['Overview', 'Pipeline Detail'] }
+  };
+  let currentKey = null;
+  let currentPage = 0;
+
+  function openLightbox(key) {
+    currentKey = key;
+    currentPage = 0;
+    renderLightboxPage();
+    document.getElementById('lightboxOverlay').classList.add('open');
+  }
+  function renderLightboxPage() {
+    const data = dashboardPages[currentKey];
+    const svgId = currentKey + '-p' + currentPage;
+    const src = document.getElementById(svgId);
+    document.getElementById('lightboxContent').innerHTML = src ? src.innerHTML : '';
+    document.getElementById('lightboxTitle').textContent = data.title + ' — ' + data.pages[currentPage];
+    const tabsEl = document.getElementById('lightboxTabs');
+    tabsEl.innerHTML = data.pages.map((p, i) =>
+      `<button class="page-tab ${i === currentPage ? 'active' : ''}" onclick="switchPage(${i})">${i+1} · ${p}</button>`
+    ).join('');
+  }
+  function switchPage(i) {
+    currentPage = i;
+    renderLightboxPage();
+  }
+  function closeLightbox() {
+    document.getElementById('lightboxOverlay').classList.remove('open');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+<script>
+  function animateCount(id, target, suffix, duration) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const span = el.querySelector('span');
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(eased * target);
+      el.firstChild.textContent = value;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  animateCount('stat-years', 5, '+', 1200);
+  animateCount('stat-dash', 4, '+', 1200);
+</script>
+</body>
+</html>
